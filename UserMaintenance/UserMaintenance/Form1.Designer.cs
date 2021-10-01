@@ -31,10 +31,8 @@ namespace UserMaintenance
         {
             this.listUsers = new System.Windows.Forms.ListBox();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.lblLastName = new System.Windows.Forms.Label();
-            this.lblFirstName = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
+            this.lblFullName = new System.Windows.Forms.Label();
+            this.txtFullName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listUsers
@@ -47,7 +45,7 @@ namespace UserMaintenance
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(363, 103);
+            this.btnAdd.Location = new System.Drawing.Point(363, 81);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(309, 36);
             this.btnAdd.TabIndex = 1;
@@ -55,51 +53,31 @@ namespace UserMaintenance
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lblLastName
+            // lblFullName
             // 
-            this.lblLastName.AutoSize = true;
-            this.lblLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblLastName.Location = new System.Drawing.Point(408, 38);
-            this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(46, 17);
-            this.lblLastName.TabIndex = 2;
-            this.lblLastName.Text = "label1";
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblFullName.Location = new System.Drawing.Point(408, 38);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(46, 17);
+            this.lblFullName.TabIndex = 2;
+            this.lblFullName.Text = "label1";
             // 
-            // lblFirstName
+            // txtFullName
             // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblFirstName.Location = new System.Drawing.Point(408, 73);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(46, 17);
-            this.lblFirstName.TabIndex = 3;
-            this.lblFirstName.Text = "label2";
-            // 
-            // txtLastName
-            // 
-            this.txtLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtLastName.Location = new System.Drawing.Point(508, 29);
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(164, 29);
-            this.txtLastName.TabIndex = 4;
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtFirstName.Location = new System.Drawing.Point(508, 64);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(164, 29);
-            this.txtFirstName.TabIndex = 5;
+            this.txtFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtFullName.Location = new System.Drawing.Point(508, 29);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(164, 29);
+            this.txtFullName.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 437);
-            this.Controls.Add(this.txtFirstName);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.lblFirstName);
-            this.Controls.Add(this.lblLastName);
+            this.Controls.Add(this.txtFullName);
+            this.Controls.Add(this.lblFullName);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.listUsers);
             this.Name = "Form1";
@@ -113,10 +91,8 @@ namespace UserMaintenance
 
         private System.Windows.Forms.ListBox listUsers;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.Label lblFirstName;
-        private System.Windows.Forms.TextBox txtLastName;
-        private System.Windows.Forms.TextBox txtFirstName;
+        private System.Windows.Forms.Label lblFullName;
+        private System.Windows.Forms.TextBox txtFullName;
     }
 }
 
