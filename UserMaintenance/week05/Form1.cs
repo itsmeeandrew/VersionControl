@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace week05
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> ticks;
         List<PortfolioItem> portfolio = new List<PortfolioItem>();
+        List<decimal> Nyereségek;
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace week05
 
             CreatePortfolio();
 
-            List<decimal> Nyereségek = new List<decimal>();
+            Nyereségek = new List<decimal>();
             int intervalum = 30;
             DateTime kezdőDátum = (from x in ticks select x.TradingDay).Min();
             DateTime záróDátum = new DateTime(2016, 12, 30);
@@ -66,6 +68,27 @@ namespace week05
             }
 
             return value;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "txt files (*.txt)|*.txt";
+            sfd.FilterIndex = 2;
+            sfd.RestoreDirectory = true;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string filename = sfd.FileName;
+                using (StreamWriter sw = new StreamWriter(filename))
+                {
+                    sw.WriteLine("Időszak, Nyereség");
+                    for (int i = 0; i < Nyereségek.Count; i++)
+                    {
+                        sw.WriteLine($"{i}, {Nyereségek[i]}");
+                    }
+                }
+            }
         }
     }
 }
