@@ -17,11 +17,38 @@ namespace week06
     public partial class Form1 : Form
     {
         BindingList<RateData> rates = new BindingList<RateData>();
+        BindingList<string> currencies = new BindingList<string>();
         public Form1()
         {
             InitializeComponent();
+            GetAvailableCurrencies();
+            //RefreshData();
+        }
+
+        private void GetAvailableCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement elem in xml.DocumentElement.ChildNodes[0])
+            {
+                currencies.Add(elem.InnerText);
+            }
+
+            comboBox1.DataSource = currencies;
+        }
+
+        private void RefreshData()
+        {
+            rates.Clear();
             dataGridView1.DataSource = rates;
             chartRateData.DataSource = rates;
+
             string xmlData = getXmlData();
             processXml(xmlData);
             makeChart();
@@ -53,6 +80,8 @@ namespace week06
             foreach (XmlElement elem in xml.DocumentElement)
             {
                 XmlElement firstChild = (XmlElement)elem.ChildNodes[0];
+                if (firstChild == null) continue;
+
                 rates.Add(new RateData()
                 {
                     Date = DateTime.Parse(elem.GetAttribute("date")),
@@ -67,15 +96,30 @@ namespace week06
             var mnbService = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = dateTimePicker1.Value.ToString(),
+                endDate = dateTimePicker2.Value.ToString()
             };
 
             var response = mnbService.GetExchangeRates(request);
             var result = response.GetExchangeRatesResult;
 
             return result;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           RefreshData();
         }
     }
 }
