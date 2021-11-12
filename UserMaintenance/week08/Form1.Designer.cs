@@ -33,13 +33,16 @@ namespace week08
             this.mainPanel = new System.Windows.Forms.Panel();
             this.createTimer = new System.Windows.Forms.Timer(this.components);
             this.conveyorTimer = new System.Windows.Forms.Timer(this.components);
+            this.carBtn = new System.Windows.Forms.Button();
+            this.ballBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Location = new System.Drawing.Point(12, 12);
+            this.mainPanel.Location = new System.Drawing.Point(12, 68);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(776, 426);
+            this.mainPanel.Size = new System.Drawing.Size(776, 370);
             this.mainPanel.TabIndex = 0;
             // 
             // createTimer
@@ -54,15 +57,48 @@ namespace week08
             this.conveyorTimer.Interval = 10;
             this.conveyorTimer.Tick += new System.EventHandler(this.conveyorTimer_Tick);
             // 
+            // carBtn
+            // 
+            this.carBtn.Location = new System.Drawing.Point(12, 12);
+            this.carBtn.Name = "carBtn";
+            this.carBtn.Size = new System.Drawing.Size(124, 49);
+            this.carBtn.TabIndex = 1;
+            this.carBtn.Text = "CAR";
+            this.carBtn.UseVisualStyleBackColor = true;
+            this.carBtn.Click += new System.EventHandler(this.carBtn_Click);
+            // 
+            // ballBtn
+            // 
+            this.ballBtn.Location = new System.Drawing.Point(142, 13);
+            this.ballBtn.Name = "ballBtn";
+            this.ballBtn.Size = new System.Drawing.Size(124, 49);
+            this.ballBtn.TabIndex = 2;
+            this.ballBtn.Text = "BALL";
+            this.ballBtn.UseVisualStyleBackColor = true;
+            this.ballBtn.Click += new System.EventHandler(this.ballBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(293, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Coming next:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ballBtn);
+            this.Controls.Add(this.carBtn);
             this.Controls.Add(this.mainPanel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,6 +107,9 @@ namespace week08
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Timer createTimer;
         private System.Windows.Forms.Timer conveyorTimer;
+        private System.Windows.Forms.Button carBtn;
+        private System.Windows.Forms.Button ballBtn;
+        private System.Windows.Forms.Label label1;
     }
 }
 

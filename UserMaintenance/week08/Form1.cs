@@ -14,13 +14,17 @@ namespace week08
 {
     public partial class Form1 : Form
     {
+        private Toy _nextToy;
         private List<Toy> _toys = new List<Toy>();
         
         private IToyFactory _factory;
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set {
+                _factory = value;
+                DisplayNext();
+            }
         }
 
         public Form1()
@@ -40,7 +44,7 @@ namespace week08
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             int maxPosition = 0;
-            foreach (Ball toy in _toys)
+            foreach (Toy toy in _toys)
             {
                 toy.MoveToy();
                 if (toy.Left > maxPosition)
@@ -55,6 +59,28 @@ namespace week08
                 mainPanel.Controls.Remove(oldestToy);
                 _toys.Remove(oldestToy);
             }
+        }
+
+        private void carBtn_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void ballBtn_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                Controls.Remove(_nextToy);
+            }
+
+            _nextToy = Factory.CreateNew();
+            _nextToy.Left = label1.Left + 50;
+            Controls.Add(_nextToy);
         }
     }
 }
