@@ -70,7 +70,7 @@ namespace week08
         {
             Factory = new BallFactory()
             {
-                BallColor = button1.BackColor
+                BallColor = btnBallColor.BackColor
             };
         }
 
@@ -82,13 +82,23 @@ namespace week08
             }
 
             _nextToy = Factory.CreateNew();
-            _nextToy.Left = label1.Left + 50;
+            _nextToy.Left = label1.Left + 75;
+            _nextToy.Top = 10;
             Controls.Add(_nextToy);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void presentBtn_Click(object sender, EventArgs e)
         {
-            var button = sender as Button;
+            Factory = new PresentFactory()
+            {
+                BoxColor = btnBoxColor.BackColor,
+                RibbonColor = btnRibbonColor.BackColor
+            };
+        }
+
+        private void btnBallColor_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
             var colorPicker = new ColorDialog();
 
             colorPicker.Color = button.BackColor;
@@ -96,6 +106,7 @@ namespace week08
             {
                 button.BackColor = colorPicker.Color;
             }
+            
         }
     }
 }

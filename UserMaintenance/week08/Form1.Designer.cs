@@ -36,14 +36,17 @@ namespace week08
             this.carBtn = new System.Windows.Forms.Button();
             this.ballBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBallColor = new System.Windows.Forms.Button();
+            this.presentBtn = new System.Windows.Forms.Button();
+            this.btnBoxColor = new System.Windows.Forms.Button();
+            this.btnRibbonColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Location = new System.Drawing.Point(12, 99);
+            this.mainPanel.Location = new System.Drawing.Point(12, 155);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(776, 339);
+            this.mainPanel.Size = new System.Drawing.Size(776, 283);
             this.mainPanel.TabIndex = 0;
             // 
             // createTimer
@@ -81,28 +84,61 @@ namespace week08
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(293, 32);
+            this.label1.Location = new System.Drawing.Point(413, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Coming next:";
             // 
-            // button1
+            // btnBallColor
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkRed;
-            this.button1.Location = new System.Drawing.Point(142, 69);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
-            this.button1.TabIndex = 4;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBallColor.BackColor = System.Drawing.Color.Orange;
+            this.btnBallColor.Location = new System.Drawing.Point(142, 69);
+            this.btnBallColor.Name = "btnBallColor";
+            this.btnBallColor.Size = new System.Drawing.Size(124, 23);
+            this.btnBallColor.TabIndex = 4;
+            this.btnBallColor.UseVisualStyleBackColor = false;
+            this.btnBallColor.Click += new System.EventHandler(this.btnBallColor_Click);
+            // 
+            // presentBtn
+            // 
+            this.presentBtn.Location = new System.Drawing.Point(272, 13);
+            this.presentBtn.Name = "presentBtn";
+            this.presentBtn.Size = new System.Drawing.Size(124, 49);
+            this.presentBtn.TabIndex = 5;
+            this.presentBtn.Text = "PRESENT";
+            this.presentBtn.UseVisualStyleBackColor = true;
+            this.presentBtn.Click += new System.EventHandler(this.presentBtn_Click);
+            // 
+            // btnBoxColor
+            // 
+            this.btnBoxColor.BackColor = System.Drawing.Color.DarkRed;
+            this.btnBoxColor.Location = new System.Drawing.Point(272, 68);
+            this.btnBoxColor.Name = "btnBoxColor";
+            this.btnBoxColor.Size = new System.Drawing.Size(124, 23);
+            this.btnBoxColor.TabIndex = 6;
+            this.btnBoxColor.UseVisualStyleBackColor = false;
+            this.btnBoxColor.Click += new System.EventHandler(this.btnBallColor_Click);
+            // 
+            // btnRibbonColor
+            // 
+            this.btnRibbonColor.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnRibbonColor.Location = new System.Drawing.Point(272, 97);
+            this.btnRibbonColor.Name = "btnRibbonColor";
+            this.btnRibbonColor.Size = new System.Drawing.Size(124, 23);
+            this.btnRibbonColor.TabIndex = 7;
+            this.btnRibbonColor.UseVisualStyleBackColor = false;
+            this.btnRibbonColor.Click += new System.EventHandler(this.btnBallColor_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRibbonColor);
+            this.Controls.Add(this.btnBoxColor);
+            this.Controls.Add(this.presentBtn);
+            this.Controls.Add(this.btnBallColor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ballBtn);
             this.Controls.Add(this.carBtn);
@@ -122,7 +158,10 @@ namespace week08
         private System.Windows.Forms.Button carBtn;
         private System.Windows.Forms.Button ballBtn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBallColor;
+        private System.Windows.Forms.Button presentBtn;
+        private System.Windows.Forms.Button btnBoxColor;
+        private System.Windows.Forms.Button btnRibbonColor;
     }
 }
 
