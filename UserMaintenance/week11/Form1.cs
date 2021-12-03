@@ -18,15 +18,33 @@ namespace week11
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
 
+        List<int> malePopulation = new List<int>();
+        List<int> femalePopulation = new List<int>();
+
         Random rnd = new Random(42);
         public Form1()
         {
             InitializeComponent();
-
-            Population = GetPopulation(@"C:\Temp\nép-teszt.csv");
+            
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+        }
 
+        private void Simulation()
+        {
+            malePopulation.Clear();
+            femalePopulation.Clear();
+            richTextBoxLog.Clear();
+            try
+            {
+                Population = GetPopulation(textBoxPopulationFilePath.Text);
+            }
+            catch
+            {
+                return;
+            }
+
+            decimal lastYear = nudLastYear.Value;
             for (int year = 2005; year <= 2024; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
@@ -37,13 +55,15 @@ namespace week11
                 int numberOfMales = (from x in Population
                                      where x.Gender == Gender.Male && x.IsAlive
                                      select x).Count();
+                malePopulation.Add(numberOfMales);
 
                 int numberOfFemales = (from x in Population
                                        where x.Gender == Gender.Female && x.IsAlive
                                        select x).Count();
-
-                Console.WriteLine(string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, numberOfMales, numberOfFemales));
+                femalePopulation.Add(numberOfFemales);
             }
+
+            DisplayResults();
         }
 
         private void SimStep(int year, Person person)
@@ -51,19 +71,19 @@ namespace week11
             if (!person.IsAlive) return;
 
             int age = year - person.BirthYear;
-            var deathProbability = (from x in DeathProbabilities
+            double deathProbability = (from x in DeathProbabilities
                                     where age == x.Age && person.Gender == x.Gender
-                                    select x).FirstOrDefault();
+                                    select x.Probability).FirstOrDefault();
 
-            if (rnd.NextDouble() < deathProbability.Probability) person.IsAlive = false;
+            if (rnd.NextDouble() <= deathProbability) person.IsAlive = false;
 
             if (person.Gender == Gender.Female && person.IsAlive)
             {
-                var birthProbability = (from x in BirthProbabilities
+                double birthProbability = (from x in BirthProbabilities
                                         where x.Age == age && x.NumberOfChildren == person.NumberOfChildren
-                                        select x).FirstOrDefault();
+                                        select x.Probability).FirstOrDefault();
 
-                if (birthProbability.Probability >= rnd.NextDouble())
+                if (rnd.NextDouble() <= birthProbability)
                 {
                     Person newborn = new Person()
                     {
@@ -140,6 +160,32 @@ namespace week11
             }
 
             return deathProbabilities;
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Simulation();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBoxPopulationFilePath.Text = ofd.FileName;
+            }
+        }
+
+        private void DisplayResults()
+        {
+            for (int i = 0; i < malePopulation.Count; i++)
+            {
+                string log = string.Format("Szimulációs év: {0} \n" +
+                    "\tFiúk: {1} \n" +
+                    "\tLányok: {2} \n\n", 2005 + i, malePopulation[i], femalePopulation[i]);
+                richTextBoxLog.Text += log;
+            }
         }
     }
 }
