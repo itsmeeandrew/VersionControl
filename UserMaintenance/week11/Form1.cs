@@ -31,7 +31,7 @@ namespace week11
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-                    
+                    SimStep(year, Population[i]);
                 }
 
                 int numberOfMales = (from x in Population
@@ -46,7 +46,35 @@ namespace week11
             }
         }
 
+        private void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
 
+            int age = year - person.BirthYear;
+            var deathProbability = (from x in DeathProbabilities
+                                    where age == x.Age && person.Gender == x.Gender
+                                    select x).FirstOrDefault();
+
+            if (rnd.NextDouble() < deathProbability.Probability) person.IsAlive = false;
+
+            if (person.Gender == Gender.Female && person.IsAlive)
+            {
+                var birthProbability = (from x in BirthProbabilities
+                                        where x.Age == age && x.NumberOfChildren == person.NumberOfChildren
+                                        select x).FirstOrDefault();
+
+                if (birthProbability.Probability >= rnd.NextDouble())
+                {
+                    Person newborn = new Person()
+                    {
+                        BirthYear = year,
+                        NumberOfChildren = 0,
+                        Gender = (Gender)rnd.Next(1, 3)
+                    };
+                    Population.Add(newborn);
+                }
+            }
+        }
 
         public List<Person> GetPopulation(string path)
         {
